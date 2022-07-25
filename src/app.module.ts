@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { HtmlScriptModule } from './html-script/html-script.module';
 import { HtmlbuilderModule } from './htmlbuilder/htmlbuilder.module';
 import { FeedModule } from './feed/feed.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -21,7 +22,8 @@ TypeOrmModule.forRoot({
   autoLoadEntities: true,
   synchronize: true,
 }),
-FeedModule],
+FeedModule,
+AuthModule],
   controllers: [AppController],
   providers: [AppService],
 
