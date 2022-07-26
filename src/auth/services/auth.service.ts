@@ -5,7 +5,7 @@ import { from, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { UserEntity } from '../models/user.entity';
 import { User} from '../models/user.class'
-import {Repository} from 'typeorm';
+import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -43,7 +43,7 @@ export class AuthService {
     validateUser(email: string, password: string): Observable<User> {
         return from(
           this.userRepository.findOne(
-            { email }
+            {email}, {select: ['id', 'firstName', 'lastName', 'email', 'password', 'role']}
           ),
         ).pipe(
           switchMap((user: User) => {

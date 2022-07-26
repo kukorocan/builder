@@ -1,5 +1,9 @@
+import {Column,
+    Entity,
+    ManyToMany,
+    OneToMany,
+    PrimaryGeneratedColumn,} from 'typeorm';
 import { FeedPostEntity } from 'src/feed/models/post.entity';
-import {Column, Entity, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
 import {Role} from './role.enum';
 
 @Entity('user')
@@ -13,9 +17,9 @@ export class UserEntity {
     @Column()
     lastName: string;
     
-    @Column({unique: true})
+    @Column({ unique: true })
     email: string;
-    
+
     @Column({select: false })
     password: string;
 
