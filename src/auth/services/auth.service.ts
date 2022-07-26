@@ -72,7 +72,15 @@ export class AuthService {
             switchMap((user: User) => {
                 if (user) {
                     // create jwt
-                    return from(this.jwtService.signAsync({ user }));
+                    if(user.role === "user"){
+                      // console.log("user")
+                      // console.log(user.firstName)
+                      return from(this.jwtService.signAsync({ user }));
+                    }else if(user.role === "admin"){
+                      // console.log("admin")
+                      // console.log(user.firstName)
+                      return from(this.jwtService.signAsync({ user }));
+                    }   
                 }
             })
         )
