@@ -4,13 +4,18 @@ import { FeedPost } from '../models/post.interface';
 import {UpdateResult, DeleteResult} from 'typeorm'
 import { FeedService } from '../services/feed.service';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/auth/models/role.enum';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('feed')
 export class FeedController {
     constructor(private feedService: FeedService){
 
     }
-    @UseGuards(JwtGuard)
+    // need to add another Roles for post
+    @Roles(Role.ADMIN, Role.USER)
+    @UseGuards(JwtGuard, RolesGuard)
     @Post()
     create(@Body() feedPost: FeedPost, @Request() req):Observable<FeedPost>{
         return this.feedService.createPost(req.user, feedPost)

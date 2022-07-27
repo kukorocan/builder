@@ -7,6 +7,8 @@ import { UserEntity } from '../models/user.entity';
 import { User} from '../models/user.class'
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { response } from 'express';
+import { send } from 'process';
 
 @Injectable()
 export class AuthService {
@@ -80,7 +82,9 @@ export class AuthService {
                       // console.log("admin")
                       // console.log(user.firstName)
                       return from(this.jwtService.signAsync({ user }));
-                    }   
+                    } else{
+                      return from(this.jwtService.signAsync({ user }));
+                    }
                 }
             })
         )
